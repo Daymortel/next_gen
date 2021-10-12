@@ -85,5 +85,4 @@ int main(void)
     {
         return 0;
     }
-	system("PAUSE");
 }
