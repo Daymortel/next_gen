@@ -2,87 +2,55 @@
 
 int main(void)
 {
-    int a, b, c, d, e; // define answers
-    int x = 0; // playstation 5
-    int y = 0; // xbox series
+    // initialization
+    int big = 0, index = 0;
+    char asw;
 
-    printf("Aimes-tu la réalité virtuelle ? (1, 2) : "); // question 1
-    scanf("%i", &a); // scan question 1
-    printf("Préfères-tu les jeux solo-naratif ou le netflix du jeu vidéo ? (1, 2) : "); // question 2
-    scanf("%i", &b); // scan question 2
-    printf("Veux-tu rejoindre la plus grosse communauté ? (1, 2) : "); // question 3
-    scanf("%i", &c); // scan question 3
-    printf("Préfères-tu une manette avec pleins de features ou une console super puissante ? (1, 2) : "); // question 4
-    scanf("%i", &d); // scan question 4
-    printf("Préfères-tu que ta console prenne de la place (ventilation) ou qu'elle se marie bien dans le salon ? (1, 2) : "); // question 5
-    scanf("%i", &e); // scan question 5
+    // les questions sont dans un tableau
+    char *q[5] = {"Aimes-tu la réalité virtuelle ? (1, 2) : ",
+                  "Préfères-tu les jeux solo-naratif ou le netflix du jeu vidéo ? (1, 2) : ",
+                  "Veux-tu rejoindre la plus grosse communauté ? (1, 2) : ",
+                  "Préfères-tu une manette avec pleins de features ou une console super puissante ? (1, 2) : ",
+                  "Préfères-tu que ta console prenne de la place (ventilation) ou qu'elle se marie bien dans le salon ? (1, 2) : "
+                 };
 
-    switch (a) //answer 1
+    // les réponses sont stockées ici
+    char *r[2] = {"Playstation 5", "Xbox Serie X"};
+
+    // le score des 2 consoles
+    int sc[2] = {0, 0};
+
+    for (int i = 0; i < 5; i++)
     {
-        case 1:
-            x++;
-            break;
-        case 2:
-            y++;
-            break;
-        default:
-            return 0;
+        // on pose ici les questions du tableau q une par une
+        printf("%s", q[i]);
+        scanf(" %c", &asw);
+
+        // on vérifie la réponse
+        if (asw == '1')
+        {
+            sc[0]++;
+        }
+        else if (asw == '2')
+        {
+            sc[1]++;
+        }
+        else
+        {
+            i--;
+        }
     }
-    switch (b) // answer 2
+
+    for (int i = 0; i < 2; i++)
     {
-        case 1:
-            x++;
-            break;
-        case 2:
-            y++;
-            break;
-        default:
-            return 0;
+        // on récupère l'indice du tableau des scores correspondant au plus grand
+        if (sc[i] > big)
+        {
+            big = sc[i];
+            index = i;
+        }
     }
-    switch (c) // answer 3
-    {
-        case 1:
-            x++;
-            break;
-        case 2:
-            y++;
-            break;
-        default:
-            return 0;
-    }
-    switch (d) // answer 4
-    {
-        case 1:
-            x++;
-            break;
-        case 2:
-            y++;
-            break;
-        default:
-            return 0;
-    }
-    switch (e) // answer 5
-    {
-        case 1:
-            x++;
-            break;
-        case 2:
-            y++;
-            break;
-        default:
-            return 0;
-    }
-    // calcul of final answer
-    if (x >= 3)
-    {
-        printf("Je te conseilles la Playstation 5\n");
-    }
-    else if (y >= 3)
-    {
-        printf("Je te conseilles la Xbox Serie X\n");
-    }
-    else
-    {
-        return 0;
-    }
+
+    // on affiche le résultat final en fonction de l'indice récupéré par la boucle
+    printf("La %s est faite pour vous !\n", r[index]);
 }
